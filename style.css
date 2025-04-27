@@ -23,6 +23,40 @@ h2 {
     font-weight: 500;
   }
   
+/* General mobile adjustments */
+@media screen and (max-width: 500px) {
+  #game-container {
+    width: 90%;
+    margin: 0 auto;
+    padding: 10px;
+    font-size: 1rem; /* Make text a little smaller */
+  }
+
+  #word-display {
+    font-size: 2rem; /* Make displayed words fit better */
+  }
+
+  #input-container input {
+    font-size: 1.2rem;
+    padding: 8px;
+    width: 100%;
+  }
+
+  #input-container button {
+    font-size: 1rem;
+    padding: 10px;
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
+@media screen and (max-width: 844px) and (orientation: landscape) {
+  #game-container {
+    width: 70%;
+    font-size: 1.2rem;
+  }
+}
+
   /* Show ONLY on screens smaller than 768px */
   @media screen and (max-width: 768px) {
     #screen-size-tip {
