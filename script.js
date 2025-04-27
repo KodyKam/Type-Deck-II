@@ -278,6 +278,24 @@ function showNextTurnPrompt() {
     const leaderboard = document.getElementById("leaderboard");
     leaderboard.innerHTML = "<h2>🏆 Leaderboard</h2>";
   
+    const savedScores = JSON.parse(localStorage.getItem("typeDeckLeaderboard")) || [];
+  
+    const ul = document.createElement("ul");
+  
+    if (savedScores.length === 0) {
+      const noScoresMessage = document.createElement("p");
+      noScoresMessage.textContent = "No scores yet.";
+      leaderboard.appendChild(noScoresMessage);
+    } else {
+      const sorted = savedScores.sort((a, b) => b.score - a.score).slice(0, 5);
+      sorted.forEach(entry => {
+        const li = document.createElement("li");
+        li.textContent = `${entry.name}: ${entry.score} words`;
+        ul.appendChild(li);
+      });
+      leaderboard.appendChild(ul);
+    }
+  
     const closeBtn = document.createElement("button");
     closeBtn.textContent = "Close";
     closeBtn.style.marginTop = "10px";
@@ -285,22 +303,4 @@ function showNextTurnPrompt() {
       leaderboard.style.display = "none";
     });
     leaderboard.appendChild(closeBtn);
-  
-    const savedScores = JSON.parse(localStorage.getItem("typeDeckLeaderboard")) || [];
-  
-    if (savedScores.length === 0) {
-      leaderboard.innerHTML += "<p>No scores yet.</p>";
-      return;
-    }
-  
-    const sorted = savedScores.sort((a, b) => b.score - a.score).slice(0, 5);
-  
-    const ul = document.createElement("ul");
-    sorted.forEach(entry => {
-      const li = document.createElement("li");
-      li.textContent = `${entry.name}: ${entry.score} words`;
-      ul.appendChild(li);
-    });
-  
-    leaderboard.appendChild(ul);
   }
