@@ -26,30 +26,48 @@ h2 {
 /* General mobile adjustments */
 @media screen and (max-width: 500px) {
   #game-container {
-    width: 90%;
+    width: 95%; /* Slightly wider so it fills nicely */
+    max-width: 400px; /* Prevents it from stretching too much */
     margin: 0 auto;
     padding: 10px;
-    font-size: 1rem; /* Make text a little smaller */
+    font-size: 1rem;
   }
 
   #word-display {
-    font-size: 2rem; /* Make displayed words fit better */
+    font-size: 2rem;
+    text-align: center; /* Centers the word nicely */
+    margin-bottom: 20px; /* Adds breathing room */
+    word-wrap: break-word; /* Prevents overflow */
+  }
+
+  #input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Adds a small gap between input and button */
+    width: 100%;
   }
 
   #input-container input {
     font-size: 1.2rem;
-    padding: 8px;
+    padding: 12px;
     width: 100%;
+    box-sizing: border-box; /* Ensures padding doesn't overflow */
   }
 
   #input-container button {
-    font-size: 1rem;
-    padding: 10px;
+    font-size: 1.1rem;
+    padding: 12px;
     width: 100%;
-    margin-top: 10px;
+    box-sizing: border-box;
+  }
+
+  /* Optional: adjust leaderboard too if it exists */
+  #leaderboard {
+    width: 100%;
+    font-size: 0.9rem;
+    margin-top: 20px;
   }
 }
-
 @media screen and (max-width: 844px) and (orientation: landscape) {
   #game-container {
     width: 70%;
