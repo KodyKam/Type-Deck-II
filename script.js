@@ -23,6 +23,7 @@ const victoryFanfare = new Audio("victoryFanfare.mp3");
 const showLeaderboardBtn = document.getElementById("show-leaderboard-btn");
 
 showLeaderboardBtn.addEventListener("click", () => {
+  console.log("Show leaderboard button clicked");
   result.innerHTML = ""; // Clear previous result/card if needed
   showLeaderboard();
   document.getElementById("leaderboard").style.display = "block";
@@ -271,36 +272,57 @@ function showNextTurnPrompt() {
     leaderboard.push({ name, score });
     leaderboard.sort((a, b) => b.score - a.score);
     if (leaderboard.length > 5) leaderboard.pop(); // keep top 5
+    console.log("Saving leaderboard to localStorage:", leaderboard)
     localStorage.setItem("typeDeckLeaderboard", JSON.stringify(leaderboard));
+    console.log("Leaderboard saved:", leaderboard);
   }
 
   function showLeaderboard() {
     const leaderboard = document.getElementById("leaderboard");
-    leaderboard.innerHTML = "<h2>🏆 Leaderboard</h2>";
+  
+    // Clear leaderboard content but not result content
+    while (leaderboard.firstChild) {
+      leaderboard.removeChild(leaderboard.firstChild);
+    }
+  
+    const container = document.createElement("div");
+    container.innerHTML = "<h2>🏆 Leaderboard</h2>";
   
     const savedScores = JSON.parse(localStorage.getItem("typeDeckLeaderboard")) || [];
   
-    const ul = document.createElement("ul");
-  
+    // If there are no scores saved
     if (savedScores.length === 0) {
       const noScoresMessage = document.createElement("p");
       noScoresMessage.textContent = "No scores yet.";
-      leaderboard.appendChild(noScoresMessage);
+      container.appendChild(noScoresMessage);
     } else {
+      // Sort and show top 5 scores
       const sorted = savedScores.sort((a, b) => b.score - a.score).slice(0, 5);
+      const ul = document.createElement("ul");
       sorted.forEach(entry => {
         const li = document.createElement("li");
         li.textContent = `${entry.name}: ${entry.score} words`;
         ul.appendChild(li);
       });
-      leaderboard.appendChild(ul);
+      container.appendChild(ul);
     }
   
+    // Optional: Add a horizontal line for visual separation
+    const hr = document.createElement("hr");
+    container.appendChild(hr);
+  
+    // Create the close button
     const closeBtn = document.createElement("button");
     closeBtn.textContent = "Close";
     closeBtn.style.marginTop = "10px";
     closeBtn.addEventListener("click", () => {
       leaderboard.style.display = "none";
+      leaderboard.innerHTML = ""; // Clear leaderboard when closing
     });
-    leaderboard.appendChild(closeBtn);
+  
+    container.appendChild(closeBtn);
+    leaderboard.appendChild(container);
+  
+    // Make sure leaderboard is visible
+    leaderboard.style.display = "block";
   }
