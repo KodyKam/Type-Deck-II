@@ -8,25 +8,23 @@
 </head>
 <body>
     <div id="player-setup">
-        <label>
-          Player 1 Name:
-          <input type="text" id="player1-name" placeholder="Enter name" />
-        </label>
-        <label>
-          Player 2 Name:
-          <input type="text" id="player2-name" placeholder="Enter name" />
-        </label>
+      <label for="player1-name">Player 1 Name:</label>
+      <input type="text" id="player1-name" placeholder="Enter name" />
+      
+      <label for="player2-name">Player 2 Name:</label>
+      <input type="text" id="player2-name" placeholder="Enter name" />
+      
         <button id="start-game">Start Game</button>
-        <h2>Welcome To Type Deck II</h2>
+        <h2>Welcome To Type Deck</h2>
         <button id="show-leaderboard-btn">🏆 Show Leaderboard 🏆</button>
       </div>
       
-      <div id="game-area" style="display:none;">
+      <div id="game-area" class = "hidden";>
         <!-- Move your existing game HTML elements inside this div -->
         <h1>Type Deck</h1>
         <h3 id="screen-size-tip">Best experienced on desktop</h3>
         <h2 id="current-player"></h2>
-        <div id="next-turn-prompt" style="display: none; text-align: center; margin-top: 20px;">
+        <div id="next-turn-prompt" class = "hidden">
             <h2 id="turn-message"></h2>
             <button id="start-turn-btn">Start Turn</button>
           </div>
@@ -46,7 +44,10 @@
         <button id="resetBtn">Play Again</button>
       </div>
 
-      <div id="leaderboard" style="display:none;"></div>
+      <div id="leaderboard" style="display:none;">
+        <h2>Leaderboard</h2>
+        <ul></ul>
+      </div>
 
   <footer>
     &copy; 2025 Kamara H. Alleyne. All rights reserved.
@@ -56,12 +57,6 @@
 </body>
 </html>
 
-<!--  GAME WITH 2 PLAYERS... PLAYER 1 AND PLAYER 2 (EDITABLE NAMES) 
-type into the textarea which starts 20 second timer
-when timer expires, alert pops up with result showing number of words with a score represented by a playing card from 
-Deck of Cards API... more words gets you a face card... less words gets you a sub-10 card
-winner is the player who finishes with the higher word count as time expires.
-Each game has 3 rounds.
-Sound effects would come from Freesound.org API
+<!--
 FUTURE VERSION WOULD INCLUDE PROVISION FOR TIE-BREAKING ETC.
 -->
